@@ -1,0 +1,68 @@
+{
+  "name": "Logtter",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspace",
+  "remoteEnv": {
+    "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "always"
+        },
+        "files.autoSave": "onFocusChange",
+        "debug.inlineValues": "off",
+        "editor.dragAndDrop": false,
+        "editor.renderWhitespace": "all",
+        "editor.showFoldingControls": "always",
+        "editor.minimap.maxColumn": 40,
+        "editor.minimap.showSlider": "always",
+        "editor.minimap.size": "fit",
+        "editor.formatOnPaste": true,
+        "files.insertFinalNewline": true,
+        "files.eol": "\n",
+        "files.exclude": {
+          "**/.git": true,
+          "**/.svn": true,
+          "**/.hg": true,
+          "**/CVS": true,
+          "**/.DS_Store": true,
+          "**/Thumbs.db": true,
+          "**/node_modules": true
+        },
+        "files.watcherExclude": {
+          "**/.git/objects/**": true,
+          "**/.git/subtree-cache/**": true,
+          "**/node_modules/*/**": true,
+          "**/.hg/store/**": true
+        },
+        "search.exclude": {
+          "**/node_modules": true,
+          "**/.webpack": true,
+          "**/dist": true,
+          "**/out": true,
+          "**/*.log": true
+        },
+        "workbench.iconTheme": "material-icon-theme",
+        "typescript.updateImportsOnFileMove.enabled": "always",
+        "eslint.format.enable": true
+      },
+      "extensions": [
+        "infeng.vscode-react-typescript",
+        "christian-kohler.npm-intellisense",
+        "dsznajder.es7-react-js-snippets",
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "PKief.material-icon-theme",
+        "MS-CEINTL.vscode-language-pack-ja",
+        "formulahendry.auto-close-tag"
+      ]
+    }
+  },
+  "onCreateCommand": "npm install -g npm@latest && npm i",
+  "remoteUser": "root"
+}
