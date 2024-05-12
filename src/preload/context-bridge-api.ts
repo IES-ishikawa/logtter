@@ -2,7 +2,7 @@ import { ipcRenderer } from 'electron'
 
 import { IpcChannel } from '../common/types'
 
-import type { CommandId, FileItem, Setting } from '../common/types'
+import type { CommandId, CustomHighlight, FileItem, Setting } from '../common/types'
 
 /**
  * IPC通信
@@ -222,4 +222,11 @@ class IpcInvoke {
    */
   public dragDropFiles: (filePaths: string[]) => Promise<FileItem[]> = (filePaths: string[]) =>
     ipcRenderer.invoke(IpcChannel.invoke.dragDropFiles, filePaths)
+
+  /**
+   * configファイルからハイライト情報リストの取得
+   * @returns ハイライト情報リスト
+   */
+  public customHighlights: () => Promise<CustomHighlight[]> = () =>
+    ipcRenderer.invoke(IpcChannel.invoke.customHighlight)
 }

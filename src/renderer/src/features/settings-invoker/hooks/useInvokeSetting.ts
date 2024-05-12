@@ -7,7 +7,6 @@ export function useInvokeSetting(): void {
   useEffect(() => {
     const invoke = async (): Promise<void> => {
       const setting = await window.api.invoke.setting()
-      console.log('invokeSetting', setting)
       setSetting(setting)
     }
     invoke()

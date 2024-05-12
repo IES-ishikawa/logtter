@@ -1,3 +1,5 @@
+import type { CustomHighlight } from '../../common/types'
+
 export type StoreType = {
   window: {
     size: {
@@ -16,5 +18,6 @@ export type StoreType = {
       theme: string
       fontSize: number
     }
+    customHighlights: CustomHighlight[]
   }
 }

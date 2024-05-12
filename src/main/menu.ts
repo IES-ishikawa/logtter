@@ -1,5 +1,5 @@
 import { is } from '@electron-toolkit/utils'
-import { Menu, dialog } from 'electron'
+import { Menu, app, dialog } from 'electron'
 import { autoUpdater } from 'electron-updater'
 
 import { log } from '../common/logger'
@@ -8,7 +8,7 @@ import { CommandId, IpcChannel } from '../common/types'
 import { config } from './config'
 
 import type { BrowserWindow, MessageBoxOptions } from 'electron'
-import type { UpdateInfo } from 'electron-updater'
+import type { UpdateDownloadedEvent, UpdateInfo } from 'electron-updater'
 
 export default class MenuBuilder {
   mainWindow: BrowserWindow
@@ -178,14 +178,14 @@ export default class MenuBuilder {
                 dialog.showMessageBox(this.mainWindow, dialogOpts)
               })
               // アップデートのダウンロードが完了
-              autoUpdater.once('update-downloaded', async () => {
+              autoUpdater.once('update-downloaded', async (e: UpdateDownloadedEvent) => {
                 log.info('Update downloaded')
                 this.mainWindow.webContents.send(IpcChannel.sendToRenderer.checkUpdate, false)
                 const dialogOpts: MessageBoxOptions = {
                   type: 'info',
                   buttons: ['更新して再起動', 'あとで'],
                   message: 'アップデート',
-                  detail: '新しいバージョンをダウンロードしました。再起動して更新を適用しますか？',
+                  detail: `バージョン${e.version}をダウンロードしました。再起動して更新を適用しますか？`,
                   cancelId: 2
                 }
 
@@ -204,6 +204,19 @@ export default class MenuBuilder {
                   `更新の確認中にエラーが発生しました。\n${err}`
                 )
               })
+            }
+          },
+          {
+            label: 'バージョン確認',
+            commandId: CommandId.checkVersion,
+            click: (): void => {
+              const dialogOpts: MessageBoxOptions = {
+                type: 'info',
+                buttons: ['OK'],
+                message: app.getName(),
+                detail: `v${app.getVersion()}`
+              }
+              dialog.showMessageBox(this.mainWindow, dialogOpts)
             }
           }
         ]

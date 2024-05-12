@@ -16,7 +16,6 @@ export function Setting(): JSX.Element {
   const setting = useAppStore((state) => state.setting)
 
   useEffect(() => {
-    console.log(setting)
     window.api.sendToMain.setting(setting)
   }, [setting])
 

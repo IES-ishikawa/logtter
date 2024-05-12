@@ -10,15 +10,20 @@ export function Viewer(): JSX.Element {
   const tabsSelected = useAppStore((state) => state.tabSelected)
 
   const setFileItems = useAppStore((state) => state.setFileItems)
+  const setCustomHighlights = useAppStore((state) => state.setCustomHighlights)
   useEffect(() => {
-    const invoke = async (): Promise<void> => {
+    const invokeHighlights = async (): Promise<void> => {
+      const customHighlights = await window.api.invoke.customHighlights()
+      setCustomHighlights(customHighlights)
+    }
+    const invokeFileItems = async (): Promise<void> => {
       const fileItems = await window.api.invoke.files()
       setFileItems(fileItems)
     }
 
-    window.api.sendToRenderer.newFile(() => invoke())
-
-    invoke()
+    window.api.sendToRenderer.newFile(() => invokeFileItems())
+    invokeHighlights()
+    invokeFileItems()
   }, [])
 
   const handleDrop = (e: React.DragEvent<HTMLDivElement>): void => {

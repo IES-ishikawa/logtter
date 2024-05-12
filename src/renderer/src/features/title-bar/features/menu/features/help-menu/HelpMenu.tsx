@@ -1,7 +1,5 @@
-import { useState } from 'react'
-
 import { CommandId } from '@common/types'
-import { Container, Grid, Menu, Modal, Paper, Typography } from '@mui/material'
+import { Menu } from '@mui/material'
 import { useAppStore } from '@renderer/store'
 import { MenuType } from '@renderer/types'
 
@@ -13,7 +11,6 @@ import type { MenuContentProps } from '../../types'
 export function HelpMenu(): JSX.Element {
   const anchors = useAnchor(MenuType.help)
   const checking = useAppStore((state) => state.checkingUpdate)
-  const [openVer, setOpenVer] = useState(false)
   const contents: MenuContentProps[] = [
     {
       label: '更新確認',
@@ -25,10 +22,7 @@ export function HelpMenu(): JSX.Element {
     {
       label: 'バージョン情報',
       closeMenu: anchors.closeMenu,
-      clickEvent: (): void => {
-        setOpenVer(true)
-        anchors.closeMenu()
-      }
+      commandId: CommandId.checkVersion
     }
   ]
 
@@ -42,37 +36,6 @@ export function HelpMenu(): JSX.Element {
           ))}
         </MenuBackground>
       </Menu>
-
-      <Modal
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}
-        open={openVer}
-        onClose={() => setOpenVer(false)}
-      >
-        <Paper sx={{ width: innerWidth * 0.3 }}>
-          <Container>
-            <Grid container marginY={2}>
-              <Grid item xs={5}>
-                <Typography color="text.secondary">プロダクト名:</Typography>
-              </Grid>
-              <Grid item xs={7}>
-                Logtter
-              </Grid>
-            </Grid>
-            <Grid container marginY={2}>
-              <Grid item xs={5}>
-                <Typography color="text.secondary">バージョン:</Typography>
-              </Grid>
-              <Grid item xs={7}>
-                {window.electron.process.versions[0]}
-              </Grid>
-            </Grid>
-          </Container>
-        </Paper>
-      </Modal>
     </>
   )
 }

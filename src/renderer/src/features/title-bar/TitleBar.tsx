@@ -5,7 +5,7 @@ import { grey } from '@mui/material/colors'
 import { useThemeMode } from '@renderer/hooks'
 
 import { Logo } from './components'
-import { Maximize, Menu, Minimize, Quit, Setting, Tail, CheckingUpdate } from './features'
+import { Maximize, Menu, Minimize, Quit, Setting, Tail, CheckingUpdate, DiffTime } from './features'
 
 import type { SxProps } from '@mui/material'
 
@@ -38,6 +38,7 @@ export function TitleBar(): JSX.Element {
 
         <Box display="flex" alignItems="center" ml="auto">
           <CheckingUpdate />
+          <DiffTime />
           <Tail />
           <Setting />
           <Minimize />

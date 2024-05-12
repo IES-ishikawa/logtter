@@ -106,6 +106,10 @@ export function registChannel(mainWindow: BrowserWindow): void {
   ipcMain.handle(IpcChannel.invoke.initMaximize, () => {
     return config.get('window.maximized')
   })
+
+  ipcMain.handle(IpcChannel.invoke.customHighlight, () => {
+    return config.get('renderer.customHighlights')
+  })
 }
 
 function getMenuItemByCommandId(commandId: number, menu: Electron.Menu): Electron.MenuItem {

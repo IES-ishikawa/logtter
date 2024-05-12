@@ -4,7 +4,8 @@ export const CommandId = {
   quitApp: 13,
   find: 21,
   fullscreen: 31,
-  checkUpdate: 41
+  checkUpdate: 41,
+  checkVersion: 42
 } as const
 
 export type CommandId = (typeof CommandId)[keyof typeof CommandId]

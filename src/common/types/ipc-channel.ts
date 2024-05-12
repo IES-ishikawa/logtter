@@ -28,7 +28,8 @@ export const IpcChannel = {
     watchFile: 'watch-file',
     files: 'files',
     setting: 'setting',
-    dragDropFiles: 'drag-drop-files'
+    dragDropFiles: 'drag-drop-files',
+    customHighlight: 'custom-highlight'
   }
 } as const
 
